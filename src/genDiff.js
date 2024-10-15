@@ -1,11 +1,11 @@
-import { readFileSync } from 'node:fs';
+import fs from 'fs';
 import _ from 'lodash';
 
 const getObjByPath = (pathToFile) => {
   if (pathToFile.endsWith('.json')) {
-    return JSON.parse(readFileSync(pathToFile));
+    return JSON.parse(fs.readFileSync(pathToFile, 'utf-8'));
   }
-  return null;
+  throw new Error('invalid format');
 };
 
 export default function genDiff(filepath1, filepath2) {
@@ -32,5 +32,5 @@ export default function genDiff(filepath1, filepath2) {
   const sortStartPosition = 4;
   const sortedDiff = _.sortBy(diff, (item) => item.at(sortStartPosition));
 
-  console.log(['{', ...sortedDiff, '}'].join('\n'));
+  return ['{', ...sortedDiff, '}'].join('\n');
 }
