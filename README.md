@@ -6,6 +6,10 @@
 
 [![Actions Status](https://github.com/chukichao/frontend-project-46/actions/workflows/hexlet-check.yml/badge.svg)](https://github.com/chukichao/frontend-project-46/actions)
 
+### Testing & Linting:
+
+[![Actions Status](https://github.com/chukichao/frontend-project-46/actions/workflows/project-check.yml/badge.svg)](https://github.com/chukichao/frontend-project-46/actions)
+
 ### CodeClimate:
 
 [![Maintainability](https://api.codeclimate.com/v1/badges/95cfeaa8a58997242984/maintainability)](https://codeclimate.com/github/chukichao/frontend-project-46/maintainability)
