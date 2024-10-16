@@ -1,16 +1,9 @@
-import fs from 'fs';
 import _ from 'lodash';
-
-const getObjByPath = (pathToFile) => {
-  if (pathToFile.endsWith('.json')) {
-    return JSON.parse(fs.readFileSync(pathToFile, 'utf-8'));
-  }
-  throw new Error('invalid format');
-};
+import parsers from './parsers.js';
 
 export default function genDiff(filepath1, filepath2) {
-  const obj1 = _.cloneDeep(getObjByPath(filepath1));
-  const obj2 = _.cloneDeep(getObjByPath(filepath2));
+  const obj1 = parsers(filepath1);
+  const obj2 = parsers(filepath2);
 
   let diff = [];
   _.forIn(obj1, (value, key) => {
@@ -32,5 +25,6 @@ export default function genDiff(filepath1, filepath2) {
   const sortStartPosition = 4;
   const sortedDiff = _.sortBy(diff, (item) => item.at(sortStartPosition));
 
+  console.log(['{', ...sortedDiff, '}'].join('\n'));
   return ['{', ...sortedDiff, '}'].join('\n');
 }

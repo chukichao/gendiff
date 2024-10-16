@@ -1,13 +1,16 @@
 ### Вычислитель отличий
 
+### JSON:
+
 [![asciicast](https://asciinema.org/a/cywgLchVvnvnZbKdUP43KrS9n.svg)](https://asciinema.org/a/cywgLchVvnvnZbKdUP43KrS9n)
 
-### Hexlet tests and linter status:
+### YML/YAML:
 
-[![Actions Status](https://github.com/chukichao/frontend-project-46/actions/workflows/hexlet-check.yml/badge.svg)](https://github.com/chukichao/frontend-project-46/actions)
+[![asciicast](https://asciinema.org/a/dOPfsZNtD3zHNJPJW56MEYoS4.svg)](https://asciinema.org/a/dOPfsZNtD3zHNJPJW56MEYoS4)
 
 ### Testing & Linting:
 
+[![Actions Status](https://github.com/chukichao/frontend-project-46/actions/workflows/hexlet-check.yml/badge.svg)](https://github.com/chukichao/frontend-project-46/actions)
 [![Actions Status](https://github.com/chukichao/frontend-project-46/actions/workflows/project-check.yml/badge.svg)](https://github.com/chukichao/frontend-project-46/actions)
 
 ### CodeClimate:
