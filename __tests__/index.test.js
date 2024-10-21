@@ -2,10 +2,8 @@ import { test, expect, beforeAll } from '@jest/globals';
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import yaml from 'js-yaml';
 
-import genDiff from '../src/genDiff.js';
-import parsers from '../src/parsers.js';
+import genDiff from '../index.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -24,28 +22,41 @@ beforeAll(() => {
   filepathJSON2 = getFixturePath('file2.json');
   filepathYML1 = getFixturePath('file1.yml');
   filepathYAML2 = getFixturePath('file2.yaml');
-
-  filepathErrorFormat = getFixturePath('file_ErrorFormat.txt');
+  filepathErrorFormat = getFixturePath('file.ini');
 });
 
-test('genDiff', () => {
-  const expectedResult = readFile('expected_result.txt').trim();
+test('stylish', () => {
+  const expectedStylish = readFile('expectedStylish.txt').trim();
 
-  expect(genDiff(filepathJSON1, filepathJSON2)).toEqual(expectedResult);
-  expect(genDiff(filepathYML1, filepathYAML2)).toEqual(expectedResult);
-
-  expect(genDiff(filepathJSON1, filepathYAML2)).toEqual(expectedResult);
-  expect(genDiff(filepathYML1, filepathJSON2)).toEqual(expectedResult);
+  expect(genDiff(filepathJSON1, filepathJSON2)).toEqual(expectedStylish);
+  expect(genDiff(filepathYML1, filepathYAML2)).toEqual(expectedStylish);
+  expect(genDiff(filepathJSON1, filepathYAML2)).toEqual(expectedStylish);
+  expect(genDiff(filepathYML1, filepathJSON2)).toEqual(expectedStylish);
 });
 
-test('parsers', () => {
-  const expectedObjFromJSON1 = JSON.parse(readFile('file1.json'));
-  const expectedObjFromYML1 = yaml.load(readFile('file1.yml'));
-  const expectedObjFromYAML2 = yaml.load(readFile('file2.yaml'));
+test('plain', () => {
+  const expectedPlain = readFile('expectedPlain.txt').trim();
 
-  expect(parsers(filepathJSON1)).toEqual(expectedObjFromJSON1);
-  expect(parsers(filepathYML1)).toEqual(expectedObjFromYML1);
-  expect(parsers(filepathYAML2)).toEqual(expectedObjFromYAML2);
+  expect(genDiff(filepathJSON1, filepathJSON2, 'plain')).toEqual(expectedPlain);
+  expect(genDiff(filepathYML1, filepathYAML2, 'plain')).toEqual(expectedPlain);
+  expect(genDiff(filepathJSON1, filepathYAML2, 'plain')).toEqual(expectedPlain);
+  expect(genDiff(filepathYML1, filepathJSON2, 'plain')).toEqual(expectedPlain);
+});
 
-  expect(() => parsers(filepathErrorFormat)).toThrow('.txt is invalid format');
+test('json', () => {
+  const expectedJSON = readFile('expectedJSON.txt').trim();
+
+  expect(genDiff(filepathJSON1, filepathJSON2, 'json')).toEqual(expectedJSON);
+  expect(genDiff(filepathYML1, filepathYAML2, 'json')).toEqual(expectedJSON);
+  expect(genDiff(filepathJSON1, filepathYAML2, 'json')).toEqual(expectedJSON);
+  expect(genDiff(filepathYML1, filepathJSON2, 'json')).toEqual(expectedJSON);
+});
+
+test('error tests', () => {
+  expect(() => genDiff(filepathJSON1, filepathErrorFormat)).toThrow(
+    "This file extension '.ini' is not supported.",
+  );
+  expect(() => genDiff(filepathJSON1, filepathJSON1, 'html')).toThrow(
+    "Format 'html' is not defined.",
+  );
 });

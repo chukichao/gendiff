@@ -1,12 +1,24 @@
-### Вычислитель отличий
+# Вычислитель отличий
 
-### JSON:
+### Сравнивает два переданных файла между собой и выводит результат сравнения в различных форматах.
 
-[![asciicast](https://asciinema.org/a/cywgLchVvnvnZbKdUP43KrS9n.svg)](https://asciinema.org/a/cywgLchVvnvnZbKdUP43KrS9n)
+_Установка:_
 
-### YML/YAML:
+1. _Клонируйте данный репозиторий._
+2. _Скачайте необходимые зависимости (запустить команду make install в корневой директории проекта)._
+3. _Введите в консоль команду gendiff с указанием абсолютного или относительного пути до файлов (поддерживаются файлы с расширением json, yml/yaml) и формата вывода данных (через опцию -f, --format)._
 
-[![asciicast](https://asciinema.org/a/dOPfsZNtD3zHNJPJW56MEYoS4.svg)](https://asciinema.org/a/dOPfsZNtD3zHNJPJW56MEYoS4)
+_Доступные форматы вывода:_
+
+- **stylish** - стилизованный формат вывода (по умолчанию).
+- **plain** - формат вывода в виде списка.
+- **json** - формат вывода в json.
+
+_gendiff -h - для получения подробной информации о работе утилиты._
+
+### Пример работы в различных форматах:
+
+[![asciicast](https://asciinema.org/a/IfmuOzRX72osrrDFaVcYi0zu4.svg)](https://asciinema.org/a/IfmuOzRX72osrrDFaVcYi0zu4)
 
 ### Testing & Linting:
 
