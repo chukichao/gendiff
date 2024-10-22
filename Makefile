@@ -1,12 +1,6 @@
 install: deps-install
 	npx simple-git-hooks
 
-run:
-	gendiff ./__fixtures__/file1.json ./__fixtures__/file2.json
-
-deps-install:
-	npm ci --legacy-peer-deps
-
 deps-update:
 	npx ncu -u
 
