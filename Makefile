@@ -4,6 +4,9 @@ install: deps-install
 deps-update:
 	npx ncu -u
 
+deps-install:
+	npm ci --legacy-peer-deps
+
 test:
 	npm test
 
