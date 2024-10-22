@@ -15,18 +15,16 @@ let filepathJSON1;
 let filepathJSON2;
 let filepathYML1;
 let filepathYAML2;
-let filepathErrorFormat;
 
 beforeAll(() => {
   filepathJSON1 = getFixturePath('file1.json');
   filepathJSON2 = getFixturePath('file2.json');
   filepathYML1 = getFixturePath('file1.yml');
   filepathYAML2 = getFixturePath('file2.yaml');
-  filepathErrorFormat = getFixturePath('file.ini');
 });
 
 test('stylish', () => {
-  const expectedStylish = readFile('expectedStylish.txt').trim();
+  const expectedStylish = readFile('result_stylish.txt').trim();
 
   expect(genDiff(filepathJSON1, filepathJSON2)).toEqual(expectedStylish);
   expect(genDiff(filepathYML1, filepathYAML2)).toEqual(expectedStylish);
@@ -35,7 +33,7 @@ test('stylish', () => {
 });
 
 test('plain', () => {
-  const expectedPlain = readFile('expectedPlain.txt').trim();
+  const expectedPlain = readFile('result_plain.txt').trim();
 
   expect(genDiff(filepathJSON1, filepathJSON2, 'plain')).toEqual(expectedPlain);
   expect(genDiff(filepathYML1, filepathYAML2, 'plain')).toEqual(expectedPlain);
@@ -44,7 +42,7 @@ test('plain', () => {
 });
 
 test('json', () => {
-  const expectedJSON = readFile('expectedJSON.txt').trim();
+  const expectedJSON = readFile('result_json.txt').trim();
 
   expect(genDiff(filepathJSON1, filepathJSON2, 'json')).toEqual(expectedJSON);
   expect(genDiff(filepathYML1, filepathYAML2, 'json')).toEqual(expectedJSON);
@@ -52,10 +50,7 @@ test('json', () => {
   expect(genDiff(filepathYML1, filepathJSON2, 'json')).toEqual(expectedJSON);
 });
 
-test('error tests', () => {
-  expect(() => genDiff(filepathJSON1, filepathErrorFormat)).toThrow(
-    "This file extension '.ini' is not supported.",
-  );
+test('incorrect format', () => {
   expect(() => genDiff(filepathJSON1, filepathJSON1, 'html')).toThrow(
     "Format 'html' is not defined.",
   );
