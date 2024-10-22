@@ -4,6 +4,7 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 
 import genDiff from '../index.js';
+import parse from '../src/parsers.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -41,6 +42,10 @@ test('json', () => {
   expect(genDiff(filepathYML1, filepathYAML2, 'json')).toEqual(expectedJSON);
   expect(genDiff(filepathJSON1, filepathYAML2, 'json')).toEqual(expectedJSON);
   expect(genDiff(filepathYML1, filepathJSON2, 'json')).toEqual(expectedJSON);
+});
+
+test('parcers', () => {
+  expect(() => parse({}, '.ini')).toThrow("This file extension '.ini' is not supported.");
 });
 
 test('incorrect format', () => {
