@@ -26,20 +26,20 @@ const getStylish = (tree) => {
     const result = object.map((key) => {
       switch (key.action) {
         case 'deleted':
-          return `${getIndent(depth, '- ')}${key.key}: ${getValue(key.oldValue, depth)}`;
+          return `${getIndent(depth, '- ')}${key.key}: ${getValue(key.value, depth)}`;
         case 'added':
-          return `${getIndent(depth, '+ ')}${key.key}: ${getValue(key.newValue, depth)}`;
+          return `${getIndent(depth, '+ ')}${key.key}: ${getValue(key.value, depth)}`;
         case 'nested':
           return `${getIndent(depth, '  ')}${key.key}: ${iter(key.children, depth + 1)}`;
         case 'changed':
           return [
-            `${getIndent(depth, '- ')}${key.key}: ${getValue(key.oldValue, depth)}\n${getIndent(
+            `${getIndent(depth, '- ')}${key.key}: ${getValue(key.value, depth)}\n${getIndent(
               depth,
               '+ ',
-            )}${key.key}: ${getValue(key.newValue, depth)}`,
+            )}${key.key}: ${getValue(key.updatedValue, depth)}`,
           ];
         default:
-          return `${getIndent(depth, '  ')}${key.key}: ${getValue(key.oldValue, depth)}`;
+          return `${getIndent(depth, '  ')}${key.key}: ${getValue(key.value, depth)}`;
       }
     });
     return ['{', ...result, `${getIndent(depth)}}`].join('\n');

@@ -29,7 +29,6 @@
   "homepage": "https://github.com/chukichao/frontend-project-46#readme",
   "dependencies": {
     "commander": "^12.1.0",
-    "debug": "^4.3.7",
     "js-yaml": "^4.1.0",
     "lodash": "^4.17.21"
   },

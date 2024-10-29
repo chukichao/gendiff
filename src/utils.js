@@ -1,50 +1,49 @@
 import _ from 'lodash';
 import path from 'path';
 
+const getExtension = (filepath) => path.extname(filepath).slice(1);
+
 const getFullPath = (filepath) => path.resolve(process.cwd(), filepath);
 
-const getDifferentObject = (obj1, obj2) => {
-  const allKeys = _.sortBy(_.union(_.keys(obj1), _.keys(obj2))).map((key) => {
-    const oldValue = obj1[key];
-    const newValue = obj2[key];
-
-    if (!_.has(obj2, key)) {
-      return {
-        action: 'deleted',
-        key,
-        oldValue,
-      };
-    }
-    if (!_.has(obj1, key)) {
-      return {
-        action: 'added',
-        key,
-        newValue,
-      };
-    }
-    if (_.isObject(oldValue) && _.isObject(newValue)) {
+const getDifferentObject = (data1, data2) => {
+  const allKeys = _.sortBy(_.union(_.keys(data1), _.keys(data2))).map((key) => {
+    if (_.isObject(data1[key]) && _.isObject(data2[key])) {
       return {
         action: 'nested',
         key,
-        children: getDifferentObject(oldValue, newValue),
+        children: getDifferentObject(data1[key], data2[key]),
       };
     }
-    if (oldValue !== newValue) {
+    if (!_.has(data2, key)) {
+      return {
+        action: 'deleted',
+        key,
+        value: data1[key],
+      };
+    }
+    if (!_.has(data1, key)) {
+      return {
+        action: 'added',
+        key,
+        value: data2[key],
+      };
+    }
+    if (!_.isEqual(data1[key], data2[key])) {
       return {
         action: 'changed',
         key,
-        oldValue,
-        newValue,
+        value: data1[key],
+        updatedValue: data2[key],
       };
     }
     return {
       action: 'unchanged',
       key,
-      oldValue,
+      value: data1[key],
     };
   });
 
   return allKeys;
 };
 
-export { getDifferentObject, getFullPath };
+export { getDifferentObject, getFullPath, getExtension };

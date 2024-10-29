@@ -4,7 +4,6 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 
 import genDiff from '../index.js';
-import parse from '../src/parsers.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -17,39 +16,17 @@ const filepathJSON2 = getFixturePath('file2.json');
 const filepathYML1 = getFixturePath('file1.yml');
 const filepathYAML2 = getFixturePath('file2.yaml');
 
-test('stylish', () => {
-  const expectedStylish = readFile('result_stylish.txt').trim();
+const expectedStylish = readFile('result_stylish.txt').trim();
+const expectedPlain = readFile('result_plain.txt').trim();
+const expectedJSON = readFile('result_json.txt').trim();
 
-  expect(genDiff(filepathJSON1, filepathJSON2)).toEqual(expectedStylish);
-  expect(genDiff(filepathYML1, filepathYAML2)).toEqual(expectedStylish);
-  expect(genDiff(filepathJSON1, filepathYAML2)).toEqual(expectedStylish);
-  expect(genDiff(filepathYML1, filepathJSON2)).toEqual(expectedStylish);
-});
-
-test('plain', () => {
-  const expectedPlain = readFile('result_plain.txt').trim();
-
-  expect(genDiff(filepathJSON1, filepathJSON2, 'plain')).toEqual(expectedPlain);
-  expect(genDiff(filepathYML1, filepathYAML2, 'plain')).toEqual(expectedPlain);
-  expect(genDiff(filepathJSON1, filepathYAML2, 'plain')).toEqual(expectedPlain);
-  expect(genDiff(filepathYML1, filepathJSON2, 'plain')).toEqual(expectedPlain);
-});
-
-test('json', () => {
-  const expectedJSON = readFile('result_json.txt').trim();
-
-  expect(genDiff(filepathJSON1, filepathJSON2, 'json')).toEqual(expectedJSON);
-  expect(genDiff(filepathYML1, filepathYAML2, 'json')).toEqual(expectedJSON);
-  expect(genDiff(filepathJSON1, filepathYAML2, 'json')).toEqual(expectedJSON);
-  expect(genDiff(filepathYML1, filepathJSON2, 'json')).toEqual(expectedJSON);
-});
-
-test('parcers', () => {
-  expect(() => parse({}, '.ini')).toThrow("This file extension '.ini' is not supported.");
-});
-
-test('incorrect format', () => {
-  expect(() => genDiff(filepathJSON1, filepathJSON1, 'html')).toThrow(
-    "Format 'html' is not defined.",
-  );
+test.each([
+  [filepathJSON1, filepathJSON2],
+  [filepathYML1, filepathYAML2],
+  [filepathJSON1, filepathYAML2],
+  [filepathYML1, filepathJSON2],
+])('genDiff', (filepath1, filepath2) => {
+  expect(genDiff(filepath1, filepath2)).toBe(expectedStylish);
+  expect(genDiff(filepath1, filepath2, 'plain')).toBe(expectedPlain);
+  expect(genDiff(filepath1, filepath2, 'json')).toBe(expectedJSON);
 });

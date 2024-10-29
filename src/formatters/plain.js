@@ -17,14 +17,14 @@ const getPlain = (tree) => {
         return `Property '${fullKey}' was removed`;
       }
       if (key.action === 'added') {
-        return `Property '${fullKey}' was added with value: ${getString(key.newValue)}`;
+        return `Property '${fullKey}' was added with value: ${getString(key.value)}`;
       }
       if (key.action === 'nested') {
         return iter(key.children, `${fullKey}.`);
       }
       if (key.action === 'changed') {
-        return `Property '${fullKey}' was updated. From ${getString(key.oldValue)} to ${getString(
-          key.newValue,
+        return `Property '${fullKey}' was updated. From ${getString(key.value)} to ${getString(
+          key.updatedValue,
         )}`;
       }
       return null;
