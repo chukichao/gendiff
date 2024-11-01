@@ -12,7 +12,6 @@ const genDiff = (filepath1, filepath2, format = 'stylish') => {
 
   const fileDiff = getDifferentObject(parseFile1, parseFile2);
   const result = createFormat(fileDiff, format);
-  console.log(result);
 
   return result;
 };
