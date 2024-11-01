@@ -33,10 +33,10 @@ const getStylish = (tree) => {
           return `${getIndent(depth, '  ')}${key.key}: ${iter(key.children, depth + 1)}`;
         case 'changed':
           return [
-            `${getIndent(depth, '- ')}${key.key}: ${getValue(key.value, depth)}\n${getIndent(
+            `${getIndent(depth, '- ')}${key.key}: ${getValue(key.value1, depth)}\n${getIndent(
               depth,
               '+ ',
-            )}${key.key}: ${getValue(key.updatedValue, depth)}`,
+            )}${key.key}: ${getValue(key.value2, depth)}`,
           ];
         default:
           return `${getIndent(depth, '  ')}${key.key}: ${getValue(key.value, depth)}`;

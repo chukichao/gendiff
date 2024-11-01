@@ -32,8 +32,8 @@ const getDifferentObject = (data1, data2) => {
       return {
         action: 'changed',
         key,
-        value: data1[key],
-        updatedValue: data2[key],
+        value1: data1[key],
+        value2: data2[key],
       };
     }
     return {

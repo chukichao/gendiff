@@ -23,8 +23,8 @@ const getPlain = (tree) => {
         return iter(key.children, `${fullKey}.`);
       }
       if (key.action === 'changed') {
-        return `Property '${fullKey}' was updated. From ${getString(key.value)} to ${getString(
-          key.updatedValue,
+        return `Property '${fullKey}' was updated. From ${getString(key.value1)} to ${getString(
+          key.value2,
         )}`;
       }
       return null;
