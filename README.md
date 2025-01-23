@@ -1,5 +1,15 @@
 # Вычислитель отличий
 
+### Testing & Linting:
+
+[![Actions Status](https://github.com/chukichao/frontend-project-46/actions/workflows/hexlet-check.yml/badge.svg)](https://github.com/chukichao/frontend-project-46/actions)
+[![Actions Status](https://github.com/chukichao/frontend-project-46/actions/workflows/project-check.yml/badge.svg)](https://github.com/chukichao/frontend-project-46/actions)
+
+### CodeClimate:
+
+[![Maintainability](https://api.codeclimate.com/v1/badges/95cfeaa8a58997242984/maintainability)](https://codeclimate.com/github/chukichao/frontend-project-46/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/95cfeaa8a58997242984/test_coverage)](https://codeclimate.com/github/chukichao/frontend-project-46/test_coverage)
+
 ### Сравнивает два переданных файла между собой и выводит результат сравнения в различных форматах.
 
 _Установка:_
@@ -19,13 +29,3 @@ _gendiff -h - для получения подробной информации 
 ### Пример работы в различных форматах:
 
 [![asciicast](https://asciinema.org/a/IfmuOzRX72osrrDFaVcYi0zu4.svg)](https://asciinema.org/a/IfmuOzRX72osrrDFaVcYi0zu4)
-
-### Testing & Linting:
-
-[![Actions Status](https://github.com/chukichao/frontend-project-46/actions/workflows/hexlet-check.yml/badge.svg)](https://github.com/chukichao/frontend-project-46/actions)
-[![Actions Status](https://github.com/chukichao/frontend-project-46/actions/workflows/project-check.yml/badge.svg)](https://github.com/chukichao/frontend-project-46/actions)
-
-### CodeClimate:
-
-[![Maintainability](https://api.codeclimate.com/v1/badges/95cfeaa8a58997242984/maintainability)](https://codeclimate.com/github/chukichao/frontend-project-46/maintainability)
-[![Test Coverage](https://api.codeclimate.com/v1/badges/95cfeaa8a58997242984/test_coverage)](https://codeclimate.com/github/chukichao/frontend-project-46/test_coverage)
